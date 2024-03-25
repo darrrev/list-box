@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@400;500&family=Roboto:wght@300&display=swap');
+
+$font-family: 'Poppins', sans-serif;
+$color-primary: #5d9cc9;
+$color-secondary: #dcdcdf;
+$color-error: #cd6155;
+$color-dark: #6f7585;
+$color-success: #5a9367;
+
+:root {
+  font-size: 16px;
+}
+
+* {
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

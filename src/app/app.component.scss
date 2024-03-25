@@ -1,0 +1,15 @@
+:host {
+  width: 100%;
+}
+
+.parent-card {
+  padding: 2rem;
+  flex: 1 1 100%;
+  .item-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  .item-card:last-child {
+    margin-bottom: 0;
+  }
+}
