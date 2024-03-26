@@ -9,34 +9,61 @@ export class AppComponent {
 
   listBoxOne = ["One", "Two", "Three", "Four", "Five", "Six"]; 
   listBoxTwo = [];
-  selectedIndex;
+  selectedIndices = [];
 
-  constructor() {
+  constructor() {}
 
+  selectAllHandler(element) {
+    let checkBoxState = element.checked;
+    let listBox = element.closest('.parent-card');
+    listBox.querySelectorAll('.item-card').forEach(
+      (el, i) => {
+        el.childNodes[0].checked = checkBoxState ? true : false;
+        this.selectItem(el.childNodes[0], i);
+      }
+    );
   }
 
-  selectedItem(event, index) {
-    event.currentTarget.style.borderLeft = "5px solid #5d9cc9";
-    this.selectedIndex = index;
+  selectItem(element, index) {
+    if(element.checked && !this.selectedIndices.includes(index)) {
+      this.selectedIndices.push(index);
+      return;
+    }
+    
+    if(this.selectedIndices.includes(index)) {
+      this.selectedIndices.splice(this.selectedIndices.indexOf(index), 1);
+      return;
+    }  
   }
 
   toRight() {
-    this.listBoxTwo.push(this.listBoxOne[this.selectedIndex]);
-    this.listBoxOne.splice(this.selectedIndex, 1);
+    this.selectedIndices.forEach(
+      item => {
+        this.listBoxTwo.push(this.listBoxOne[item]);
+        this.listBoxOne.splice(item, 1);
+        this.selectedIndices = [];
+      }
+    );
   }
 
   toLeft() {
-    this.listBoxOne.push(this.listBoxTwo[this.selectedIndex]);
-    this.listBoxTwo.splice(this.selectedIndex, 1);
+    
   }
 
   allRight() {
-    this.listBoxTwo = this.listBoxOne;
-    this.listBoxOne = [];
+    this.selectedIndices.forEach(
+      item => {
+        this.listBoxTwo.push(this.listBoxOne[item]);
+        if(item === this.selectedIndices[this.selectedIndices.length - 1]) {
+          for(let i = this.selectedIndices.length - 1; i >= 0; i--) {
+            this.listBoxOne.splice(this.selectedIndices[i], 1);
+          }
+        } 
+      }
+    );
   }
 
   allLeft() {
-    this.listBoxOne = this.listBoxTwo;
-    this.listBoxTwo = [];
+
   }
 }

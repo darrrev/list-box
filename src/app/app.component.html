@@ -1,24 +1,35 @@
-<h5 class="mb-4">List Box v1.0</h5>
+<h5 class="mb-4">List Box v1.1</h5>
 <div class="d-flex">
   <div class="col-12 card parent-card">
-    <div class="card item-card" tabindex="-1" *ngFor="let item of listBoxOne; let i = index" 
-    (focus)="selectedItem($event, i)"
-    (focusout)="$event.currentTarget.style.borderLeft = '1px solid #00000020'">
-      Item {{ item }}
+    <div *ngIf="listBoxOne.length" class="mb-4">
+      <input class="form-control form-control-sm mb-2" type="text" placeholder="Search">
+      <div class="d-flex align-items-center">
+        <input class="mr-2" type="checkbox" #checkboxAll (change)="selectAllHandler(checkboxAll)">
+        <span style="font-size: 14px;">Select all</span>
+      </div>
+    </div>
+    <div class="card item-card" tabindex="-1" *ngFor="let item of listBoxOne; let i = index">
+      <input type="checkbox" #checkboxItem (change)="selectItem(checkboxItem, i)">
+      <span>Item {{ item }}</span>
     </div>
   </div>
   
   <div class="col d-flex flex-column justify-content-center" style="gap: 1rem;">
-    <button class="btn btn-primary" (click)="toRight()">></button>
-    <button class="btn btn-primary" (click)="toLeft()"><</button>
-    <button class="btn btn-primary" (click)="allRight()">>></button>
-    <button class="btn btn-primary" (click)="allLeft()"><<</button>
+    <button class="btn btn-primary" [disabled]="!listBoxOne.length || selectedIndices.length > 1" (click)="toRight()">></button>
+    <button class="btn btn-primary" [disabled]="!listBoxTwo.length" (click)="toLeft()"><</button>
+    <button class="btn btn-primary" [disabled]="!listBoxOne.length" (click)="allRight()">>></button>
+    <button class="btn btn-primary" [disabled]="!listBoxTwo.length" (click)="allLeft()"><<</button>
   </div>
   
   <div class="col-12 card parent-card">
-    <div class="card item-card" tabindex="-1" *ngFor="let item of listBoxTwo; let i = index"
-    (focus)="selectedItem($event, i)"
-    (focusout)="$event.currentTarget.style.borderLeft = '1px solid #00000020'">
+    <div *ngIf="listBoxTwo.length" class="mb-4">
+      <input class="form-control form-control-sm mb-2" type="text" placeholder="Search">
+      <div class="d-flex align-items-center">
+        <input class="mr-2" type="checkbox" #checkboxAll (change)="selectAllHandler(checkboxAll)">
+        <span style="font-size: 14px;">Select all</span>
+      </div>
+    </div>
+    <div class="card item-card" tabindex="-1" *ngFor="let item of listBoxTwo; let i = index">
       Item {{ item }}
     </div>
   </div>
