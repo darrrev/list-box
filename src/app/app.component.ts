@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent {
   selectedIndicesLeft = [];
   selectedIndicesRight = [];
 
-  constructor() {}
+  constructor(private changeDetection: ChangeDetectorRef) {}
 
   selectAllHandler(element) {
     let checkBoxState = element.checked;
@@ -30,7 +30,7 @@ export class AppComponent {
 
   selectItem(element, index) {
     if(element.closest('.left-box')) {
-      if(element.checked && !this.selectedIndicesLeft.includes(index)) return this.selectedIndicesLeft.push(index); 
+      if(element.checked && !this.selectedIndicesLeft.includes(index)) return this.selectedIndicesLeft.push(index);
       this.selectedIndicesLeft.splice(this.selectedIndicesLeft.indexOf(index), 1);
     } else {
       if(element.checked && !this.selectedIndicesRight.includes(index)) return this.selectedIndicesRight.push(index);
@@ -47,9 +47,7 @@ export class AppComponent {
       this.listBoxLeft.splice(this.selectedIndicesLeft[0], 1);
       this.selectedIndicesLeft = [];
     }
-
-    let cbxAll = this.cBoxLeft.nativeElement;
-    if(cbxAll.checked) cbxAll.checked = false;
+    this.cBoxLeft.nativeElement.checked = false;
   }
 
   toLeft() {
@@ -61,9 +59,7 @@ export class AppComponent {
       this.listBoxRight.splice(this.selectedIndicesRight[0], 1);
       this.selectedIndicesRight = [];
     }
-
-    let cbxAll = this.cBoxRight.nativeElement;
-    if(cbxAll.checked) cbxAll.checked = false;
+    this.cBoxRight.nativeElement.checked = false;
   }
 
   allRight() {
@@ -81,6 +77,10 @@ export class AppComponent {
           if(item === this.selectedIndicesLeft[this.selectedIndicesLeft.length - 1]) {
             for(let i = this.selectedIndicesLeft.length - 1; i >= 0; i--) {
               this.listBoxLeft.splice(this.selectedIndicesLeft[i], 1);
+              if(i === 0) {
+                this.selectedIndicesLeft = [];
+                this.cBoxLeft.nativeElement.checked = false;
+              }
             }
           } 
         }
@@ -103,6 +103,10 @@ export class AppComponent {
           if(item === this.selectedIndicesRight[this.selectedIndicesRight.length - 1]) {
             for(let i = this.selectedIndicesRight.length - 1; i >= 0; i--) {
               this.listBoxRight.splice(this.selectedIndicesRight[i], 1);
+              if(i === 0) {
+                this.selectedIndicesRight = [];
+                this.cBoxRight.nativeElement.checked = false;
+              }
             }
           } 
         }
