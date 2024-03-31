@@ -71,7 +71,7 @@ export class AppComponent {
         }
       );
     } else {
-      this.selectedIndicesLeft.forEach(
+      this.selectedIndicesLeft.sort().forEach(
         item => {
           this.listBoxRight.push(this.listBoxLeft[item]);
           if(item === this.selectedIndicesLeft[this.selectedIndicesLeft.length - 1]) {
@@ -97,7 +97,7 @@ export class AppComponent {
         }
       );
     } else {
-      this.selectedIndicesRight.forEach(
+      this.selectedIndicesRight.sort().forEach(
         item => {
           this.listBoxLeft.push(this.listBoxRight[item]);
           if(item === this.selectedIndicesRight[this.selectedIndicesRight.length - 1]) {
