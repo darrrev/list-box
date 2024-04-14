@@ -1,0 +1,37 @@
+<h5 class="mb-4">List Box v1.4</h5>
+<div class="d-flex">
+  <div class="col-12 card parent-card left-box">
+    <div *ngIf="listBoxLeft.length" class="mb-4">
+      <input class="form-control form-control-sm mb-2" type="text" placeholder="Search" #searchInput (input)="itemSearch(searchInput)">
+      <div class="d-flex align-items-center">
+        <input class="mr-2" type="checkbox" #checkboxAllLeft (change)="selectAllHandler(checkboxAllLeft)">
+        <span style="font-size: 14px;">Select all</span>
+      </div>
+    </div>
+    <div class="card item-card" *ngFor="let item of listBoxLeft; let i = index">
+      <input type="checkbox" #checkboxItem (change)="selectItem(checkboxItem, i)">
+      <span>Item {{ item }}</span>
+    </div>
+  </div>
+  
+  <div class="col d-flex flex-column justify-content-center" style="gap: 1rem;">
+    <button class="btn btn-primary" [disabled]="!listBoxLeft.length || selectedIndicesLeft.length > 1" (click)="toRight()">></button>
+    <button class="btn btn-primary" [disabled]="!listBoxRight.length || selectedIndicesRight.length > 1" (click)="toLeft()"><</button>
+    <button class="btn btn-primary" [disabled]="!listBoxLeft.length" (click)="allRight()">>></button>
+    <button class="btn btn-primary" [disabled]="!listBoxRight.length" (click)="allLeft()"><<</button>
+  </div>
+  
+  <div class="col-12 card parent-card">
+    <div *ngIf="listBoxRight.length" class="mb-4">
+      <input class="form-control form-control-sm mb-2" type="text" placeholder="Search" #searchInput (input)="itemSearch(searchInput)">
+      <div class="d-flex align-items-center">
+        <input class="mr-2" type="checkbox" #checkboxAllRight (change)="selectAllHandler(checkboxAllRight)">
+        <span style="font-size: 14px;">Select all</span>
+      </div>
+    </div>
+    <div class="card item-card" *ngFor="let item of listBoxRight; let i = index">
+      <input type="checkbox" #checkboxItem (change)="selectItem(checkboxItem, i)">
+      <span>Item {{ item }}</span>
+    </div>
+  </div>
+</div>

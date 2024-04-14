@@ -1,0 +1,15 @@
+.parent-card {
+  padding: 2rem;
+  flex: 1 1 100%;
+  .item-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .8rem;
+  }
+  .item-card:last-child {
+    margin-bottom: 0;
+  }
+}

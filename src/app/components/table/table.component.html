@@ -1,0 +1,25 @@
+<div class="d-flex">
+  <table class="table table-bordered" *ngIf="fenrir?.length; else tmpNoData">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let personel of fenrir">
+        <td>{{ personel.name }}</td>
+        <td>{{ personel.age }}</td>
+        <td>
+          <button class="btn btn-outline-secondary btn-sm mr-2">Edit</button>
+          <button class="btn btn-outline-danger btn-sm mr-2">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #tmpNoData>
+    <h5>No available data.</h5>
+  </ng-template>
+</div>
